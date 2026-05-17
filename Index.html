@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/kshit/Downloads/index_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PodReads — Books &amp; articles from the world's best podcasts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Index_files/css2" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="./Index_files/js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QGMMTX58FJ');
+  </script>
+
+  <style>
+    :root {
+      --bg:       #08080C;
+      --bg1:      #0E0E14;
+      --bg2:      #14141C;
+      --rule:     #1C1C26;
+      --rule2:    #26262F;
+      --ink:      #EBE5DB;
+      --ink2:     #77778A;
+      --ink3:     #38383F;
+      --gold:     #C9A96E;
+      --gold-lo:  rgba(201,169,110,.08);
+      --gold-rim: rgba(201,169,110,.22);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      background:var(--bg); color:var(--ink);
+      font-family:'Barlow Condensed', sans-serif;
+      min-height:100vh; -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content:''; pointer-events:none;
+      position:fixed; inset:0; z-index:999;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity:.028; mix-blend-mode:overlay;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position:sticky; top:0; z-index:100;
+      height:52px; padding:0 2.5rem;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(8,8,12,.9); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--rule);
+    }
+    .logo {
+      font-family:'Fraunces',serif; font-size:1.3rem;
+      font-weight:500; font-style:italic;
+      letter-spacing:.01em; cursor:pointer; color:var(--ink);
+    }
+    .logo span { color:var(--gold); }
+    .back {
+      display:none; align-items:center; gap:8px;
+      font-size:.65rem; font-weight:700; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--ink2);
+      cursor:pointer; transition:color .2s;
+      border:1px solid var(--rule2); padding:5px 14px; border-radius:2px;
+    }
+    .back:hover { color:var(--ink); border-color:var(--ink3); }
+    .back svg { width:12px; height:12px; }
+
+    /* ── LAYOUT ──────────────────────────────────────── */
+    .w { max-width:1080px; margin:0 auto; padding:0 2.5rem; }
+    .view { display:none; }
+    .view.on { display:block; }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      display:grid;
+      grid-template-columns:1fr 1.55fr;
+      gap:3.5rem;
+      align-items:center;
+      padding:4rem 0;
+      border-bottom:1px solid var(--rule);
+      position:relative; overflow:hidden;
+    }
+    .hero::after {
+      content:'READ';
+      position:absolute; left:-1rem; bottom:-2rem;
+      font-family:'Fraunces',serif; font-size:clamp(6rem,14vw,13rem);
+      font-weight:700; color:rgba(201,169,110,.03);
+      line-height:1; pointer-events:none; user-select:none;
+      font-style:italic;
+    }
+    .hero-left { position:relative; z-index:1; }
+    .hero-kicker {
+      font-size:.65rem; font-weight:700; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--gold);
+      margin-bottom:1.25rem; display:block;
+    }
+    .hero h1 {
+      font-family:'Fraunces',serif;
+      font-size:clamp(2rem,3.5vw,3rem);
+      font-weight:500; line-height:1.1;
+      font-optical-sizing:auto;
+      margin-bottom:1rem;
+    }
+    .hero h1 em { font-style:italic; color:var(--gold); font-weight:300; }
+    .hero-sub {
+      font-size:.92rem; line-height:1.75; color:var(--ink);
+      font-weight:400; letter-spacing:.01em;
+      opacity:.82;
+    }
+    .hero-sub + .hero-sub {
+      margin-top:.7rem;
+      opacity:.55;
+    }
+    .hero-stats { display:flex; gap:2rem; margin-top:2rem; }
+    .stat .n {
+      font-family:'Fraunces',serif; font-size:2rem;
+      font-weight:700; font-optical-sizing:auto;
+      line-height:1; color:var(--ink); display:block;
+    }
+    .stat .l {
+      font-size:.58rem; font-weight:700; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--ink3); margin-top:4px;
+    }
+
+    /* ── HERO RIGHT — RANK CARDS ──────────────────────── */
+    .hero-right { min-width:0; }
+    .hero-right-head {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:1.25rem;
+    }
+    .hero-right-label {
+      font-size:.65rem; font-weight:700; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--ink2);
+    }
+    .hero-right-tabs {
+      display:flex; gap:0; border:1px solid var(--rule2); border-radius:3px; overflow:hidden;
+    }
+    .hero-tab {
+      padding:4px 12px; font-size:.6rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--ink2); background:none; border:none; cursor:pointer;
+      transition:all .15s;
+    }
+    .hero-tab:hover { color:var(--ink); }
+    .hero-tab.on { background:var(--gold); color:var(--bg); }
+
+    .rank-scroll {
+      display:flex; gap:10px;
+      overflow-x:auto; padding-bottom:6px;
+      scrollbar-width:none;
+    }
+    .rank-scroll::-webkit-scrollbar { display:none; }
+
+    .rank-card {
+      flex-shrink:0; width:120px; cursor:pointer;
+      transition:transform .2s;
+    }
+    .rank-card:hover { transform:translateY(-3px); }
+    .rank-cover {
+      width:120px; height:170px;
+      border-radius:4px; overflow:hidden;
+      background:var(--bg2); border:1px solid var(--rule);
+      margin-bottom:8px; position:relative;
+    }
+    .rank-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+    .rank-cover-skel {
+      width:100%; height:100%;
+      background:linear-gradient(90deg,var(--bg2) 25%,var(--bg1) 50%,var(--bg2) 75%);
+      background-size:200% 100%; animation:shimmer 1.4s infinite;
+    }
+    .rank-num {
+      position:absolute; top:6px; left:6px;
+      width:22px; height:22px;
+      background:var(--gold); color:var(--bg);
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:.7rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+      border-radius:3px; z-index:1;
+    }
+    .rank-title {
+      font-family:'Fraunces',serif; font-size:.82rem;
+      font-weight:500; line-height:1.25;
+      font-optical-sizing:auto; margin-bottom:3px;
+      overflow:hidden; text-overflow:ellipsis;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+    }
+    .rank-author { font-size:.65rem; color:var(--ink2); margin-bottom:4px; }
+    .rank-count {
+      font-size:.6rem; font-weight:700; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--gold);
+    }
+
+    .view-all-link {
+      display:inline-flex; align-items:center; gap:6px;
+      margin-top:1rem; font-size:.68rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--ink2); background:none; border:none;
+      cursor:pointer; transition:color .15s; padding:0;
+    }
+    .view-all-link:hover { color:var(--gold); }
+
+    /* All-recs expanded section */
+    #all-recs-sect { display:none; }
+
+    /* ── SECTION ─────────────────────────────────────── */
+    .sect { padding:3.5rem 0; border-bottom:1px solid var(--rule); }
+    .sect:last-child { border-bottom:none; }
+    .sect-title {
+      font-family:'Fraunces',serif; font-size:1.4rem;
+      font-weight:500; font-optical-sizing:auto;
+      margin-bottom:1.75rem; letter-spacing:-.01em;
+    }
+
+    /* ── TABS ─────────────────────────────────────────── */
+    .tabs {
+      display:flex; border-bottom:1px solid var(--rule);
+      margin-bottom:1.5rem;
+    }
+    .tab {
+      padding:.6rem 1rem;
+      font-size:.65rem; font-weight:700; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--ink2);
+      border:none; background:none; cursor:pointer;
+      border-bottom:2px solid transparent; margin-bottom:-1px;
+      transition:color .15s, border-color .15s;
+    }
+    .tab:hover { color:var(--ink); }
+    .tab.on { color:var(--gold); border-bottom-color:var(--gold); }
+
+    /* ── CHIPS ────────────────────────────────────────── */
+    .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:1.75rem; }
+    .chip {
+      padding:4px 12px; font-size:.62rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      border:1px solid var(--rule2); border-radius:2px;
+      color:var(--ink2); cursor:pointer; background:none;
+      transition:all .15s;
+    }
+    .chip:hover { border-color:var(--ink2); color:var(--ink); }
+    .chip.on { background:var(--gold-lo); border-color:var(--gold-rim); color:var(--gold); }
+
+    /* ── REC ROW ──────────────────────────────────────── */
+    .rec-list { position:relative; }
+
+    .rec-row {
+      display:grid;
+      grid-template-columns:50px 64px 1fr auto;
+      gap:1rem; align-items:center;
+      padding:1rem .5rem;
+      border-bottom:1px solid var(--rule);
+      position:relative; transition:background .15s;
+      border-radius:3px;
+    }
+    .rec-row:last-child { border-bottom:none; }
+    .rec-row:hover { background:var(--bg1); }
+
+    /* Book cover cell */
+    .rec-cover {
+      width:50px; height:72px;
+      border-radius:3px; overflow:hidden;
+      background:var(--bg2); border:1px solid var(--rule);
+      flex-shrink:0; position:relative;
+    }
+    .rec-cover img {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .rec-cover-skeleton {
+      width:100%; height:100%;
+      background:linear-gradient(90deg,var(--bg2) 25%,var(--bg1) 50%,var(--bg2) 75%);
+      background-size:200% 100%;
+      animation:shimmer 1.4s infinite;
+    }
+    .rec-cover-none {
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.6rem; color:var(--ink3); font-weight:600;
+      letter-spacing:.05em; text-transform:uppercase;
+      writing-mode:vertical-rl; text-orientation:mixed;
+    }
+    @keyframes shimmer {
+      0%{background-position:200% 0} 100%{background-position:-200% 0}
+    }
+
+    /* The big ghost number */
+    .rec-count-ghost {
+      position:absolute; right:80px; top:50%;
+      transform:translateY(-50%);
+      font-family:'Fraunces',serif; font-weight:700;
+      font-size:4.5rem; line-height:1;
+      color:rgba(201,169,110,.07);
+      pointer-events:none; user-select:none;
+      font-optical-sizing:auto;
+    }
+
+    .rec-count {
+      text-align:center;
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .rec-count .n {
+      font-family:'Fraunces',serif; font-weight:700;
+      font-size:2rem; line-height:1;
+      color:var(--gold); font-optical-sizing:auto;
+    }
+    .rec-count .l {
+      font-size:.55rem; font-weight:700; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--ink3); margin-top:2px;
+    }
+
+    .rec-body { min-width:0; }
+    .rec-title {
+      font-family:'Fraunces',serif; font-size:1.1rem;
+      font-weight:500; line-height:1.25;
+      font-optical-sizing:auto;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      margin-bottom:5px;
+    }
+    .rec-author {
+      font-size:.72rem; font-weight:500; color:var(--ink2);
+      letter-spacing:.04em; margin-bottom:7px;
+    }
+    .rec-pods {
+      font-size:.62rem; font-weight:500; color:var(--ink3);
+      letter-spacing:.04em; margin-left:10px;
+    }
+    .rec-tags { display:flex; flex-wrap:wrap; gap:4px; }
+    .rec-tag {
+      font-size:.58rem; font-weight:700; letter-spacing:.1em;
+      text-transform:uppercase; padding:2px 8px;
+      border:1px solid var(--rule2); border-radius:2px;
+      color:var(--ink3);
+    }
+
+    .rec-action { flex-shrink:0; }
+    .rec-action a {
+      display:block; font-size:.62rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--ink2); text-decoration:none;
+      padding:7px 12px; border:1px solid var(--rule2);
+      border-radius:2px; white-space:nowrap;
+      transition:all .15s;
+    }
+    .rec-action a:hover { color:var(--gold); border-color:var(--gold-rim); background:var(--gold-lo); }
+
+    /* ── PODCAST GRID ─────────────────────────────────── */
+    .pod-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+      gap:1.25rem;
+    }
+    .pod-card {
+      cursor:pointer; position:relative;
+      border-radius:4px; overflow:hidden;
+      border:1px solid var(--rule);
+      transition:transform .25s, border-color .2s;
+      aspect-ratio:1;
+    }
+    .pod-card:hover { transform:translateY(-4px); border-color:var(--rule2); }
+    .pod-card:hover .pod-overlay { opacity:1; }
+    .pod-card:hover .pod-name { color:var(--gold); }
+
+    .pod-bg {
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .pod-bg img { width:100%; height:100%; object-fit:cover; }
+    .pod-initials {
+      font-family:'Fraunces',serif; font-size:2.2rem;
+      font-weight:700; font-style:italic;
+      color:rgba(255,255,255,.55); font-optical-sizing:auto;
+    }
+    .pod-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(8,8,12,.85) 0%, rgba(8,8,12,.1) 60%);
+      opacity:.7; transition:opacity .25s;
+    }
+    .pod-info {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:.75rem;
+    }
+    .pod-name {
+      font-family:'Fraunces',serif; font-size:.95rem;
+      font-weight:500; line-height:1.2;
+      font-optical-sizing:auto; transition:color .2s;
+      margin-bottom:2px;
+    }
+    .pod-host { font-size:.6rem; font-weight:600; letter-spacing:.08em; color:var(--ink2); margin-bottom:2px; }
+    .pod-count { font-size:.58rem; font-weight:700; letter-spacing:.1em; color:var(--ink3); }
+
+    /* ── PODCAST DETAIL HEADER ────────────────────────── */
+    .pod-hdr {
+      padding:3rem 0 2rem;
+      border-bottom:1px solid var(--rule);
+      display:flex; align-items:flex-start; gap:2rem;
+    }
+    .pod-hdr-art {
+      width:88px; height:88px; flex-shrink:0;
+      border-radius:4px; overflow:hidden;
+      border:1px solid var(--rule);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .pod-hdr-art img { width:100%; height:100%; object-fit:cover; }
+    .pod-hdr-initials {
+      font-family:'Fraunces',serif; font-size:2rem;
+      font-weight:700; font-style:italic;
+      color:rgba(255,255,255,.55);
+    }
+    .pod-hdr-info h2 {
+      font-family:'Fraunces',serif; font-size:1.9rem;
+      font-weight:500; font-optical-sizing:auto;
+      line-height:1.1; margin-bottom:5px;
+    }
+    .pod-hdr-host {
+      font-size:.7rem; font-weight:600; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--ink2); margin-bottom:1rem;
+    }
+    .pod-hdr-stats { display:flex; gap:1.75rem; }
+    .pod-stat .n {
+      font-family:'Fraunces',serif; font-size:1.5rem;
+      font-weight:700; font-optical-sizing:auto; color:var(--ink);
+    }
+    .pod-stat .l {
+      font-size:.58rem; font-weight:700; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--ink3);
+    }
+    .pod-content { padding:2rem 0; }
+
+    /* ── EMPTY ────────────────────────────────────────── */
+    .empty {
+      padding:3.5rem 0; text-align:center;
+      font-size:.8rem; font-weight:600; letter-spacing:.08em;
+      text-transform:uppercase; color:var(--ink3);
+    }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      border-top:1px solid var(--rule); padding:2rem 2.5rem;
+      text-align:center; font-size:.62rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--ink3);
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .rec-row { animation:fadeUp .3s ease both; }
+    .pod-card { animation:fadeUp .3s ease both; }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    /* ── TABLET (769–1024px) ──────────────────────────── */
+    @media (min-width:769px) and (max-width:1024px) {
+      .hero { grid-template-columns:1fr 1.15fr; gap:2rem; padding:3rem 0; }
+      .hero h1 { font-size:clamp(1.8rem,3vw,2.4rem); }
+      .rank-card { width:100px; }
+      .rank-cover { width:100px; height:144px; }
+      .pod-grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:1.1rem; }
+    }
+
+    /* ── MOBILE COLLAPSE (≤768px) ─────────────────────── */
+    @media (max-width:768px) {
+      .hero {
+        grid-template-columns:1fr; gap:2rem; padding:2.5rem 0;
+      }
+      .hero::after { display:none; }
+      .rank-card { width:110px; }
+      .rank-cover { width:110px; height:155px; }
+    }
+
+    /* ── PHONE (≤640px) ───────────────────────────────── */
+    @media (max-width:640px) {
+      .w { padding:0 1.1rem; }
+      nav { padding:0 1.1rem; height:48px; }
+      .logo { font-size:1.15rem; }
+      footer { padding:1.5rem 1.1rem; }
+
+      /* hero */
+      .hero { padding:2rem 0; gap:1.75rem; }
+      .hero h1 { font-size:1.75rem; }
+      .hero-stats { gap:1.5rem; }
+      .hero-stats .stat .n { font-size:1.6rem; }
+
+      /* rank cards — smaller, still scrollable */
+      .rank-card { width:95px; }
+      .rank-cover { width:95px; height:134px; }
+      .rank-scroll { gap:8px; }
+      .rank-title { font-size:.74rem; }
+      .rank-author { font-size:.6rem; }
+      .rank-count { font-size:.58rem; }
+
+      /* rec rows — hide cover on very small screens, 3-col */
+      .rec-row { grid-template-columns:44px 1fr auto; gap:.65rem; }
+      .rec-cover { display:none; }
+      .rec-count-ghost { display:none; }
+      .rec-count .n { font-size:1.4rem; }
+
+      /* podcast grid */
+      .pod-grid { grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:.9rem; }
+      .pod-name { font-size:.78rem; }
+
+      /* podcast detail */
+      .pod-hdr { flex-direction:column; gap:1rem; padding:2rem 0 1.5rem; }
+      .pod-hdr-art { width:72px; height:72px; }
+      .pod-hdr-info h2 { font-size:1.5rem; }
+      .pod-hdr-stats { gap:1rem; }
+
+      /* sect title */
+      .sect-title { font-size:1.2rem; }
+      .sect { padding:2.5rem 0; }
+    }
+
+    /* ── SMALL PHONE (≤380px) ─────────────────────────── */
+    @media (max-width:380px) {
+      .hero h1 { font-size:1.55rem; }
+      .rank-card { width:85px; }
+      .rank-cover { width:85px; height:120px; }
+      .pod-grid { grid-template-columns:repeat(3,1fr); gap:.75rem; }
+      .rec-action a { font-size:.58rem; padding:5px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo" onclick="showHome()">Pod<span>Reads</span></span>
+  <div class="back" id="back" onclick="showHome()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+    All Podcasts
+  </div>
+</nav>
+
+<!-- ══ HOME VIEW ══════════════════════════════════════ -->
+<div class="view on" id="home-view">
+  <div class="w">
+
+    <!-- SPLIT HERO -->
+    <section class="hero">
+
+      <!-- LEFT: copy + stats -->
+      <div class="hero-left">
+        <span class="hero-kicker">Curated for readers</span>
+        <h1>Every book they said<br>you should read.<br><em>All in one place.</em></h1>
+        <p class="hero-sub">You're listening. They recommend something good. You don't have time to write it down. PodReads does that for you.</p>
+        <p class="hero-sub">Books and articles recommended on the world's best podcasts. Curated, ranked, and in one place.</p>
+        <div class="hero-stats">
+          <div class="stat"><span class="n" id="s-books">167</span><span class="l">Books</span></div>
+          <div class="stat"><span class="n" id="s-articles">22</span><span class="l">Articles</span></div>
+          <div class="stat"><span class="n" id="s-pods">20</span><span class="l">Podcasts</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: top ranked books -->
+      <div class="hero-right">
+        <div class="hero-right-head">
+          <span class="hero-right-label">Top recommendations</span>
+          <div class="hero-right-tabs">
+            <button class="hero-tab on" onclick="setHeroTab(&#39;books&#39;,this)">Books</button>
+            <button class="hero-tab" onclick="setHeroTab(&#39;articles&#39;,this)">Articles</button>
+          </div>
+        </div>
+        <div class="rank-scroll" id="rank-scroll"><div class="rank-card" data-rank-id="poor-charlies-tf" data-title="Poor Charlie&#39;s Almanack" data-author="Charlie Munger" onclick="window.open(&#39;https://www.amazon.in/s?k=Poor+Charlie%27s+Almanack&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">1</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">Poor Charlie's Almanack</div>
+      <div class="rank-author">Charlie Munger</div>
+      <div class="rank-count">16 mentions</div>
+    </div><div class="rank-card" data-rank-id="zero-to-one-f" data-title="Zero to One" data-author="Peter Thiel" onclick="window.open(&#39;https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">2</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">Zero to One</div>
+      <div class="rank-author">Peter Thiel</div>
+      <div class="rank-count">16 mentions</div>
+    </div><div class="rank-card" data-rank-id="psych-money-mfm" data-title="The Psychology of Money" data-author="Morgan Housel" onclick="window.open(&#39;https://www.amazon.in/s?k=The+Psychology+of+Money+Morgan+Housel&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">3</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">The Psychology of Money</div>
+      <div class="rank-author">Morgan Housel</div>
+      <div class="rank-count">10 mentions</div>
+    </div><div class="rank-card" data-rank-id="road-to-serfdom-ec" data-title="The Road to Serfdom" data-author="Friedrich Hayek" onclick="window.open(&#39;https://www.amazon.in/s?k=The+Road+to+Serfdom+Hayek&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">4</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">The Road to Serfdom</div>
+      <div class="rank-author">Friedrich Hayek</div>
+      <div class="rank-count">10 mentions</div>
+    </div><div class="rank-card" data-rank-id="atomic-h-hub" data-title="Atomic Habits" data-author="James Clear" onclick="window.open(&#39;https://www.amazon.in/s?k=Atomic+Habits+James+Clear&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">5</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">Atomic Habits</div>
+      <div class="rank-author">James Clear</div>
+      <div class="rank-count">9 mentions</div>
+    </div><div class="rank-card" data-rank-id="surely-joking" data-title="Surely You&#39;re Joking, Mr. Feynman!" data-author="Richard Feynman" onclick="window.open(&#39;https://www.amazon.in/s?k=Surely+You%27re+Joking+Mr+Feynman&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">6</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">Surely You're Joking, Mr. Feynman!</div>
+      <div class="rank-author">Richard Feynman</div>
+      <div class="rank-count">8 mentions</div>
+    </div><div class="rank-card" data-rank-id="almanack-kp" data-title="The Almanack of Naval Ravikant" data-author="Eric Jorgenson" onclick="window.open(&#39;https://www.amazon.in/s?k=Almanack+Naval+Ravikant&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">7</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">The Almanack of Naval Ravikant</div>
+      <div class="rank-author">Eric Jorgenson</div>
+      <div class="rank-count">8 mentions</div>
+    </div><div class="rank-card" data-rank-id="stubborn" data-title="Stubborn Attachments" data-author="Tyler Cowen" onclick="window.open(&#39;https://www.amazon.in/s?k=Stubborn+Attachments+Tyler+Cowen&#39;,&#39;_blank&#39;)" style="">
+      <div class="rank-cover">
+        <span class="rank-num">8</span>
+        <div class="rank-cover-skel"></div>
+      </div>
+      <div class="rank-title">Stubborn Attachments</div>
+      <div class="rank-author">Tyler Cowen</div>
+      <div class="rank-count">8 mentions</div>
+    </div></div>
+        <button class="view-all-link" onclick="toggleAllRecs(this)">
+          View all recommendations &nbsp;→
+        </button>
+      </div>
+
+    </section>
+
+    <!-- FULL RECS (hidden, revealed by "View all") -->
+    <section class="sect" id="all-recs-sect">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <div class="sect-title" style="margin-bottom:0">All Recommendations</div>
+        <div class="tabs" id="g-tabs" style="border:none;margin-bottom:0">
+          <button class="tab on" onclick="setGTab(&#39;books&#39;,this)">Books</button>
+          <button class="tab" onclick="setGTab(&#39;articles&#39;,this)">Articles</button>
+        </div>
+      </div>
+      <div class="chips" id="g-chips"></div>
+      <div id="g-list"></div>
+    </section>
+
+    <!-- PODCAST GRID -->
+    <section class="sect">
+      <div class="sect-title">Browse by Podcast</div>
+      <div class="pod-grid" id="pod-grid"><div class="pod-card" data-pod-id="tim-ferriss" onclick="showPod(&#39;tim-ferriss&#39;)" style="animation-delay:0s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb.jpg" alt="Tim Ferriss Show" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Tim Ferriss Show</div>
+        <div class="pod-host">Tim Ferriss</div>
+        <div class="pod-count">25 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="seen-unseen" onclick="showPod(&#39;seen-unseen&#39;)" style="animation-delay:0.03s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(1).jpg" alt="Seen and Unseen" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Seen and Unseen</div>
+        <div class="pod-host">Amit Varma</div>
+        <div class="pod-count">22 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="founders" onclick="showPod(&#39;founders&#39;)" style="animation-delay:0.06s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(2).jpg" alt="Founders" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Founders</div>
+        <div class="pod-host">David Senra</div>
+        <div class="pod-count">21 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="knowledge-project" onclick="showPod(&#39;knowledge-project&#39;)" style="animation-delay:0.09s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(3).jpg" alt="The Knowledge Project" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">The Knowledge Project</div>
+        <div class="pod-host">Shane Parrish</div>
+        <div class="pod-count">17 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="everything-is-everything" onclick="showPod(&#39;everything-is-everything&#39;)" style="animation-delay:0.12s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(4).jpg" alt="Everything is Everything" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Everything is Everything</div>
+        <div class="pod-host">Amit Varma &amp; Ajay Shah</div>
+        <div class="pod-count">17 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="lex-fridman" onclick="showPod(&#39;lex-fridman&#39;)" style="animation-delay:0.15s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(5).jpg" alt="Lex Fridman Podcast" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Lex Fridman Podcast</div>
+        <div class="pod-host">Lex Fridman</div>
+        <div class="pod-count">14 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="econtalk" onclick="showPod(&#39;econtalk&#39;)" style="animation-delay:0.18s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(6).jpg" alt="EconTalk" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">EconTalk</div>
+        <div class="pod-host">Russ Roberts</div>
+        <div class="pod-count">14 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="my-first-million" onclick="showPod(&#39;my-first-million&#39;)" style="animation-delay:0.21s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(7).jpg" alt="My First Million" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">My First Million</div>
+        <div class="pod-host">Sam Parr &amp; Shaan Puri</div>
+        <div class="pod-count">13 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="huberman-lab" onclick="showPod(&#39;huberman-lab&#39;)" style="animation-delay:0.24s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(8).jpg" alt="Huberman Lab" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Huberman Lab</div>
+        <div class="pod-host">Andrew Huberman</div>
+        <div class="pod-count">12 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="acquired" onclick="showPod(&#39;acquired&#39;)" style="animation-delay:0.27s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(9).jpg" alt="Acquired" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Acquired</div>
+        <div class="pod-host">Ben Gilbert &amp; David Rosenthal</div>
+        <div class="pod-count">11 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="invest-like-best" onclick="showPod(&#39;invest-like-best&#39;)" style="animation-delay:0.3s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(10).jpg" alt="Invest Like the Best" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Invest Like the Best</div>
+        <div class="pod-host">Patrick O'Shaughnessy</div>
+        <div class="pod-count">10 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="conversations-tyler" onclick="showPod(&#39;conversations-tyler&#39;)" style="animation-delay:0.32999999999999996s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(11).jpg" alt="Conversations with Tyler" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Conversations with Tyler</div>
+        <div class="pod-host">Tyler Cowen</div>
+        <div class="pod-count">10 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="diary-of-ceo" onclick="showPod(&#39;diary-of-ceo&#39;)" style="animation-delay:0.36s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(12).jpg" alt="Diary of a CEO" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Diary of a CEO</div>
+        <div class="pod-host">Steven Bartlett</div>
+        <div class="pod-count">9 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="lennys-podcast" onclick="showPod(&#39;lennys-podcast&#39;)" style="animation-delay:0.39s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(13).jpg" alt="Lenny&#39;s Podcast" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Lenny's Podcast</div>
+        <div class="pod-host">Lenny Rachitsky</div>
+        <div class="pod-count">9 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="how-i-write" onclick="showPod(&#39;how-i-write&#39;)" style="animation-delay:0.42s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(14).jpg" alt="How I Write" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">How I Write</div>
+        <div class="pod-host">David Perell</div>
+        <div class="pod-count">8 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="masters-of-scale" onclick="showPod(&#39;masters-of-scale&#39;)" style="animation-delay:0.44999999999999996s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(15).jpg" alt="Masters of Scale" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Masters of Scale</div>
+        <div class="pod-host">Reid Hoffman</div>
+        <div class="pod-count">7 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="dwarkesh" onclick="showPod(&#39;dwarkesh&#39;)" style="animation-delay:0.48s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(16).jpg" alt="Dwarkesh Podcast" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Dwarkesh Podcast</div>
+        <div class="pod-host">Dwarkesh Patel</div>
+        <div class="pod-count">7 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="raj-shamani" onclick="showPod(&#39;raj-shamani&#39;)" style="animation-delay:0.51s">
+      <div class="pod-bg" style="background:#1C0000;position:absolute;inset:0"><span class="pod-initials">RS</span></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Raj Shamani</div>
+        <div class="pod-host">Raj Shamani</div>
+        <div class="pod-count">7 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="nikhil-kamath" onclick="showPod(&#39;nikhil-kamath&#39;)" style="animation-delay:0.54s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(17).jpg" alt="Nikhil Kamath" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">Nikhil Kamath</div>
+        <div class="pod-host">Nikhil Kamath</div>
+        <div class="pod-count">6 recs</div>
+      </div>
+    </div><div class="pod-card" data-pod-id="beerbiceps" onclick="showPod(&#39;beerbiceps&#39;)" style="animation-delay:0.57s">
+      <div class="pod-bg" style="background: none; position: absolute; inset: 0px;"><img src="./Index_files/600x600bb(18).jpg" alt="BeerBiceps" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">BeerBiceps</div>
+        <div class="pod-host">Ranveer Allahbadia</div>
+        <div class="pod-count">6 recs</div>
+      </div>
+    </div></div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══ PODCAST VIEW ════════════════════════════════════ -->
+<div class="view" id="pod-view">
+  <div class="w">
+    <div class="pod-hdr" id="pod-hdr"></div>
+    <div class="pod-content">
+      <div class="tabs" id="p-tabs">
+        <button class="tab on" onclick="setPTab(&#39;books&#39;,this)">Books</button>
+        <button class="tab" onclick="setPTab(&#39;articles&#39;,this)">Articles</button>
+      </div>
+      <div class="chips" id="p-chips"></div>
+      <div id="p-list"></div>
+    </div>
+  </div>
+</div>
+
+<footer>PodReads — curated by Kshitij Anand · updated regularly</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   DATA
+   ══════════════════════════════════════════════════════ */
+const DATA = [
+  {
+    id:"huberman-lab", name:"Huberman Lab", host:"Andrew Huberman", color:"#0B1E30", coverArt:null,
+    books:[
+      {id:"why-we-sleep",title:"Why We Sleep",author:"Matthew Walker",mentions:6,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Why+We+Sleep+Matthew+Walker"},
+      {id:"outlive",title:"Outlive",author:"Peter Attia",mentions:4,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Outlive+Peter+Attia"},
+      {id:"body-score",title:"The Body Keeps the Score",author:"Bessel van der Kolk",mentions:3,topics:["Psychology","Health"],amazonLink:"https://www.amazon.in/s?k=The+Body+Keeps+the+Score"},
+      {id:"dopamine-nation",title:"Dopamine Nation",author:"Anna Lembke",mentions:3,topics:["Psychology","Health"],amazonLink:"https://www.amazon.in/s?k=Dopamine+Nation+Anna+Lembke"},
+      {id:"protocols-hub",title:"Protocols: An Operating Manual for the Human Body",author:"Andrew Huberman",mentions:3,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Protocols+Operating+Manual+Human+Body+Huberman"},
+      {id:"lifespan-hub",title:"Lifespan",author:"David Sinclair",mentions:2,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Lifespan+David+Sinclair"},
+      {id:"circadian-code",title:"The Circadian Code",author:"Satchin Panda",mentions:2,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=The+Circadian+Code+Satchin+Panda"},
+      {id:"waking-up-hub",title:"Waking Up",author:"Sam Harris",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Waking+Up+Sam+Harris"},
+      {id:"breath-hub",title:"Breath",author:"James Nestor",mentions:2,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Breath+James+Nestor"},
+      {id:"molecule-more",title:"The Molecule of More",author:"Daniel Lieberman & Michael Long",mentions:2,topics:["Science","Psychology"],amazonLink:"https://www.amazon.in/s?k=The+Molecule+of+More"},
+      {id:"atomic-h-hub",title:"Atomic Habits",author:"James Clear",mentions:2,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Atomic+Habits+James+Clear"},
+      {id:"good-energy",title:"Good Energy",author:"Casey Means",mentions:1,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Good+Energy+Casey+Means"},
+    ],
+    articles:[]
+  },
+  {
+    id:"tim-ferriss", name:"Tim Ferriss Show", host:"Tim Ferriss", color:"#1A0C2E", coverArt:null,
+    books:[
+      {id:"war-of-art",title:"The War of Art",author:"Steven Pressfield",mentions:5,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=The+War+of+Art+Pressfield"},
+      {id:"meditations",title:"Meditations",author:"Marcus Aurelius",mentions:5,topics:["Philosophy"],amazonLink:"https://www.amazon.in/s?k=Meditations+Marcus+Aurelius"},
+      {id:"poor-charlies-tf",title:"Poor Charlie's Almanack",author:"Charlie Munger",mentions:4,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Poor+Charlie%27s+Almanack"},
+      {id:"obstacle-way",title:"The Obstacle Is the Way",author:"Ryan Holiday",mentions:3,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=The+Obstacle+Is+the+Way"},
+      {id:"tao-te-ching",title:"Tao Te Ching",author:"Lao Tzu",mentions:3,topics:["Philosophy"],amazonLink:"https://www.amazon.in/s?k=Tao+Te+Ching"},
+      {id:"letters-stoic",title:"Letters from a Stoic",author:"Seneca",mentions:3,topics:["Philosophy"],amazonLink:"https://www.amazon.in/s?k=Letters+from+a+Stoic+Seneca"},
+      {id:"surely-joking",title:"Surely You're Joking, Mr. Feynman!",author:"Richard Feynman",mentions:3,topics:["Science","Culture"],amazonLink:"https://www.amazon.in/s?k=Surely+You%27re+Joking+Mr+Feynman"},
+      {id:"tools-titans",title:"Tools of Titans",author:"Tim Ferriss",mentions:3,topics:["Business","Health","Psychology"],amazonLink:"https://www.amazon.in/s?k=Tools+of+Titans+Tim+Ferriss"},
+      {id:"tribe-mentors",title:"Tribe of Mentors",author:"Tim Ferriss",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Tribe+of+Mentors+Tim+Ferriss"},
+      {id:"4hw",title:"The 4-Hour Workweek",author:"Tim Ferriss",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=4+Hour+Workweek+Tim+Ferriss"},
+      {id:"magic-thinking-big",title:"The Magic of Thinking Big",author:"David J. Schwartz",mentions:2,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=The+Magic+of+Thinking+Big+David+Schwartz"},
+      {id:"tribe",title:"Tribe",author:"Sebastian Junger",mentions:2,topics:["Culture","Psychology"],amazonLink:"https://www.amazon.in/s?k=Tribe+Sebastian+Junger"},
+      {id:"principles",title:"Principles",author:"Ray Dalio",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Principles+Ray+Dalio"},
+      {id:"ride-of-lifetime",title:"The Ride of a Lifetime",author:"Bob Iger",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Ride+of+a+Lifetime+Bob+Iger"},
+      {id:"inner-game-tennis",title:"The Inner Game of Tennis",author:"W. Timothy Gallwey",mentions:2,topics:["Psychology","Culture"],amazonLink:"https://www.amazon.in/s?k=The+Inner+Game+of+Tennis"},
+      {id:"awareness-dm",title:"Awareness",author:"Anthony de Mello",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Awareness+Anthony+de+Mello"},
+      {id:"vagabonding",title:"Vagabonding",author:"Rolf Potts",mentions:2,topics:["Culture"],amazonLink:"https://www.amazon.in/s?k=Vagabonding+Rolf+Potts"},
+      {id:"80-20-principle",title:"The 80/20 Principle",author:"Richard Koch",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+80+20+Principle+Richard+Koch"},
+      {id:"siddhartha",title:"Siddhartha",author:"Hermann Hesse",mentions:2,topics:["Philosophy","Culture"],amazonLink:"https://www.amazon.in/s?k=Siddhartha+Hermann+Hesse"},
+      {id:"hard-thing-tf",title:"The Hard Thing About Hard Things",author:"Ben Horowitz",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Hard+Thing+About+Hard+Things"},
+      {id:"why-we-sleep-tf",title:"Why We Sleep",author:"Matthew Walker",mentions:1,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Why+We+Sleep+Matthew+Walker"},
+      {id:"finite-infinite",title:"Finite and Infinite Games",author:"James P. Carse",mentions:1,topics:["Philosophy"],amazonLink:"https://www.amazon.in/s?k=Finite+and+Infinite+Games+James+Carse"},
+    ],
+    articles:[
+      {id:"fear-setting",title:"Fear-Setting: The Most Valuable Exercise I Do Every Month",author:"Tim Ferriss",mentions:5,topics:["Psychology","Business"],url:"https://tim.blog/2017/05/15/fear-setting/"},
+      {id:"pmarca-startups",title:"The Pmarca Guide to Startups",author:"Marc Andreessen",mentions:3,topics:["Business","Tech"],url:"https://pmarchive.com/guide_to_startups_part1.html"},
+      {id:"last-lecture",title:"The Last Lecture",author:"Randy Pausch",mentions:2,topics:["Culture","Psychology"],url:"https://www.cs.cmu.edu/~pausch/Randy/pauschlastlecturetranscript.pdf"},
+    ]
+  },
+  {
+    id:"founders", name:"Founders", host:"David Senra", color:"#241000", coverArt:null,
+    books:[
+      {id:"shoe-dog",title:"Shoe Dog",author:"Phil Knight",mentions:4,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Shoe+Dog+Phil+Knight"},
+      {id:"poor-charlies-f",title:"Poor Charlie's Almanack",author:"Charlie Munger",mentions:4,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Poor+Charlie%27s+Almanack"},
+      {id:"sam-walton",title:"Sam Walton: Made in America",author:"Sam Walton",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Sam+Walton+Made+in+America"},
+      {id:"snowball",title:"The Snowball",author:"Alice Schroeder",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+Snowball+Warren+Buffett"},
+      {id:"titan",title:"Titan",author:"Ron Chernow",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Titan+Ron+Chernow"},
+      {id:"elon-book",title:"Elon Musk",author:"Walter Isaacson",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Elon+Musk+Walter+Isaacson"},
+      {id:"steve-jobs-isaacson",title:"Steve Jobs",author:"Walter Isaacson",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Steve+Jobs+Walter+Isaacson"},
+      {id:"becoming-steve-jobs",title:"Becoming Steve Jobs",author:"Brent Schlender & Rick Tetzeli",mentions:2,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Becoming+Steve+Jobs"},
+      {id:"autobiography-carnegie",title:"The Autobiography of Andrew Carnegie",author:"Andrew Carnegie",mentions:2,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Autobiography+Andrew+Carnegie"},
+      {id:"fish-ate-whale",title:"The Fish That Ate the Whale",author:"Rich Cohen",mentions:2,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+Fish+That+Ate+the+Whale+Rich+Cohen"},
+      {id:"everything-store-f",title:"The Everything Store",author:"Brad Stone",mentions:2,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+Everything+Store+Brad+Stone"},
+      {id:"zero-to-one-f",title:"Zero to One",author:"Peter Thiel",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel"},
+      {id:"against-the-odds",title:"Against the Odds",author:"James Dyson",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Against+the+Odds+James+Dyson"},
+      {id:"grinding-it-out",title:"Grinding It Out",author:"Ray Kroc",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Grinding+It+Out+Ray+Kroc"},
+      {id:"pour-heart",title:"Pour Your Heart Into It",author:"Howard Schultz",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Pour+Your+Heart+Into+It+Howard+Schultz"},
+      {id:"business-adventures",title:"Business Adventures",author:"John Brooks",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Business+Adventures+John+Brooks"},
+      {id:"hp-way",title:"The HP Way",author:"Dave Packard",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+HP+Way+Dave+Packard"},
+      {id:"creativity-inc",title:"Creativity Inc.",author:"Ed Catmull",mentions:1,topics:["Business","Culture"],amazonLink:"https://www.amazon.in/s?k=Creativity+Inc+Ed+Catmull"},
+      {id:"hard-thing",title:"The Hard Thing About Hard Things",author:"Ben Horowitz",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Hard+Thing+About+Hard+Things"},
+      {id:"outsiders-f",title:"The Outsiders",author:"William Thorndike",mentions:1,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Outsiders+William+Thorndike"},
+      {id:"how-billion",title:"How to Make a Few Billion Dollars",author:"Brad Jacobs",mentions:1,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=How+to+Make+a+Few+Billion+Dollars+Brad+Jacobs"},
+    ],
+    articles:[]
+  },
+  {
+    id:"knowledge-project", name:"The Knowledge Project", host:"Shane Parrish", color:"#0A1C0E", coverArt:null,
+    books:[
+      {id:"poor-charlies-kp",title:"Poor Charlie's Almanack",author:"Charlie Munger",mentions:5,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Poor+Charlie%27s+Almanack"},
+      {id:"seeking-wisdom",title:"Seeking Wisdom",author:"Peter Bevelin",mentions:3,topics:["Philosophy","Business"],amazonLink:"https://www.amazon.in/s?k=Seeking+Wisdom+Peter+Bevelin"},
+      {id:"thinking-in-bets",title:"Thinking in Bets",author:"Annie Duke",mentions:3,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Thinking+in+Bets+Annie+Duke"},
+      {id:"great-mental-models",title:"The Great Mental Models Vol. 1",author:"Shane Parrish",mentions:3,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Great+Mental+Models"},
+      {id:"clear-thinking",title:"Clear Thinking",author:"Shane Parrish",mentions:3,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=Clear+Thinking+Shane+Parrish"},
+      {id:"art-of-learning",title:"The Art of Learning",author:"Josh Waitzkin",mentions:3,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=The+Art+of+Learning+Josh+Waitzkin"},
+      {id:"righteous-mind",title:"The Righteous Mind",author:"Jonathan Haidt",mentions:2,topics:["Psychology","Culture"],amazonLink:"https://www.amazon.in/s?k=The+Righteous+Mind+Jonathan+Haidt"},
+      {id:"almanack-kp",title:"The Almanack of Naval Ravikant",author:"Eric Jorgenson",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Almanack+Naval+Ravikant"},
+      {id:"mans-search-meaning",title:"Man's Search for Meaning",author:"Viktor Frankl",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Man%27s+Search+for+Meaning+Viktor+Frankl"},
+      {id:"influence-cialdini",title:"Influence",author:"Robert Cialdini",mentions:2,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Influence+Robert+Cialdini"},
+      {id:"deep-work-kp",title:"Deep Work",author:"Cal Newport",mentions:2,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=Deep+Work+Cal+Newport"},
+      {id:"sapiens-kp",title:"Sapiens",author:"Yuval Noah Harari",mentions:1,topics:["History","Science"],amazonLink:"https://www.amazon.in/s?k=Sapiens+Yuval+Noah+Harari"},
+      {id:"sovereign-individual",title:"The Sovereign Individual",author:"Davidson & Rees-Mogg",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Sovereign+Individual"},
+      {id:"when-breath",title:"When Breath Becomes Air",author:"Paul Kalanithi",mentions:1,topics:["Culture","Psychology"],amazonLink:"https://www.amazon.in/s?k=When+Breath+Becomes+Air+Paul+Kalanithi"},
+    ],
+    articles:[
+      {id:"circle-competence",title:"Circle of Competence",author:"Shane Parrish",mentions:3,topics:["Business","Philosophy"],url:"https://fs.blog/circle-of-competence/"},
+      {id:"first-principles",title:"First Principles: The Building Blocks of True Knowledge",author:"Shane Parrish",mentions:3,topics:["Business","Philosophy"],url:"https://fs.blog/first-principles/"},
+      {id:"inversion",title:"Inversion: The Power of Thinking Backwards",author:"Shane Parrish",mentions:2,topics:["Business","Philosophy"],url:"https://fs.blog/inversion/"},
+    ]
+  },
+  {
+    id:"my-first-million", name:"My First Million", host:"Sam Parr & Shaan Puri", color:"#101A00", coverArt:null,
+    books:[
+      {id:"almanack-naval",title:"The Almanack of Naval Ravikant",author:"Eric Jorgenson",mentions:4,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Almanack+Naval+Ravikant"},
+      {id:"100m-offers",title:"$100M Offers",author:"Alex Hormozi",mentions:4,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=100M+Offers+Alex+Hormozi"},
+      {id:"zero-to-one-mfm",title:"Zero to One",author:"Peter Thiel",mentions:3,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel"},
+      {id:"100m-leads",title:"$100M Leads",author:"Alex Hormozi",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=100M+Leads+Alex+Hormozi"},
+      {id:"emyth",title:"The E-Myth Revisited",author:"Michael Gerber",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=E-Myth+Revisited"},
+      {id:"rework",title:"Rework",author:"Jason Fried & DHH",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Rework+Jason+Fried"},
+      {id:"built-to-sell",title:"Built to Sell",author:"John Warrillow",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Built+to+Sell+John+Warrillow"},
+      {id:"millionaire-fastlane",title:"The Millionaire Fastlane",author:"MJ DeMarco",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Millionaire+Fastlane"},
+      {id:"same-as-ever",title:"Same as Ever",author:"Morgan Housel",mentions:1,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=Same+as+Ever+Morgan+Housel"},
+      {id:"psych-money-mfm",title:"The Psychology of Money",author:"Morgan Housel",mentions:1,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Psychology+of+Money+Morgan+Housel"},
+    ],
+    articles:[
+      {id:"idea-maze",title:"The Idea Maze",author:"Balaji Srinivasan",mentions:3,topics:["Business","Tech"],url:"https://balajis.com/the-idea-maze/"},
+      {id:"1000-true-fans",title:"1,000 True Fans",author:"Kevin Kelly",mentions:3,topics:["Business"],url:"https://kk.org/thetechnium/1000-true-fans/"},
+      {id:"nav-wealth",title:"How to Get Rich (Without Getting Lucky)",author:"Naval Ravikant",mentions:2,topics:["Business","Philosophy"],url:"https://nav.al/rich"},
+    ]
+  },
+  {
+    id:"acquired", name:"Acquired", host:"Ben Gilbert & David Rosenthal", color:"#001420", coverArt:null,
+    books:[
+      {id:"everything-store",title:"The Everything Store",author:"Brad Stone",mentions:4,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+Everything+Store+Brad+Stone"},
+      {id:"no-rules-rules",title:"No Rules Rules",author:"Reed Hastings",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=No+Rules+Rules+Netflix"},
+      {id:"shoe-dog-acq",title:"Shoe Dog",author:"Phil Knight",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Shoe+Dog+Phil+Knight"},
+      {id:"blitzscaling-acq",title:"Blitzscaling",author:"Reid Hoffman",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Blitzscaling+Reid+Hoffman"},
+      {id:"chip-war-acq",title:"Chip War",author:"Chris Miller",mentions:2,topics:["History","Tech"],amazonLink:"https://www.amazon.in/s?k=Chip+War+Chris+Miller"},
+      {id:"hard-thing-acq",title:"The Hard Thing About Hard Things",author:"Ben Horowitz",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Hard+Thing+About+Hard+Things"},
+      {id:"sam-walton-acq",title:"Sam Walton: Made in America",author:"Sam Walton",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Sam+Walton+Made+in+America"},
+      {id:"zero-to-one-acq",title:"Zero to One",author:"Peter Thiel",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel"},
+      {id:"steve-jobs-acq",title:"Steve Jobs",author:"Walter Isaacson",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Steve+Jobs+Walter+Isaacson"},
+    ],
+    articles:[
+      {id:"aggregation-theory",title:"Aggregation Theory",author:"Ben Thompson",mentions:3,topics:["Business","Tech"],url:"https://stratechery.com/2015/aggregation-theory/"},
+      {id:"pmarca-pmf",title:"The Only Thing That Matters",author:"Marc Andreessen",mentions:2,topics:["Business","Tech"],url:"https://pmarchive.com/guide_to_startups_part4.html"},
+    ]
+  },
+  {
+    id:"lex-fridman", name:"Lex Fridman Podcast", host:"Lex Fridman", color:"#121200", coverArt:null,
+    books:[
+      {id:"surely-joking-lex",title:"Surely You're Joking, Mr. Feynman!",author:"Richard Feynman",mentions:5,topics:["Science","Culture"],amazonLink:"https://www.amazon.in/s?k=Surely+You%27re+Joking+Mr+Feynman"},
+      {id:"geb",title:"Gödel, Escher, Bach",author:"Douglas Hofstadter",mentions:4,topics:["Science","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Godel+Escher+Bach"},
+      {id:"superintelligence",title:"Superintelligence",author:"Nick Bostrom",mentions:3,topics:["Science","Tech"],amazonLink:"https://www.amazon.in/s?k=Superintelligence+Nick+Bostrom"},
+      {id:"life-3",title:"Life 3.0",author:"Max Tegmark",mentions:3,topics:["Science","Tech"],amazonLink:"https://www.amazon.in/s?k=Life+3.0+Max+Tegmark"},
+      {id:"crime-punishment",title:"Crime and Punishment",author:"Fyodor Dostoevsky",mentions:3,topics:["Culture","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Crime+and+Punishment+Dostoevsky"},
+      {id:"brothers-karamazov",title:"The Brothers Karamazov",author:"Fyodor Dostoevsky",mentions:3,topics:["Culture","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Brothers+Karamazov+Dostoevsky"},
+      {id:"mans-search-lex",title:"Man's Search for Meaning",author:"Viktor Frankl",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Man%27s+Search+for+Meaning+Viktor+Frankl"},
+      {id:"how-change-mind",title:"How to Change Your Mind",author:"Michael Pollan",mentions:2,topics:["Science","Psychology"],amazonLink:"https://www.amazon.in/s?k=How+to+Change+Your+Mind+Michael+Pollan"},
+      {id:"art-of-learning-lex",title:"The Art of Learning",author:"Josh Waitzkin",mentions:2,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=The+Art+of+Learning+Josh+Waitzkin"},
+      {id:"feynman-lectures",title:"The Feynman Lectures on Physics",author:"Richard Feynman",mentions:2,topics:["Science"],amazonLink:"https://www.amazon.in/s?k=Feynman+Lectures+Physics"},
+      {id:"1984-lex",title:"1984",author:"George Orwell",mentions:2,topics:["Culture","Philosophy"],amazonLink:"https://www.amazon.in/s?k=1984+George+Orwell"},
+      {id:"book-of-why",title:"The Book of Why",author:"Judea Pearl",mentions:2,topics:["Science","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Book+of+Why+Judea+Pearl"},
+      {id:"on-intelligence",title:"On Intelligence",author:"Jeff Hawkins",mentions:1,topics:["Science","Tech"],amazonLink:"https://www.amazon.in/s?k=On+Intelligence+Jeff+Hawkins"},
+      {id:"bitcoin-standard",title:"The Bitcoin Standard",author:"Saifedean Ammous",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Bitcoin+Standard+Saifedean"},
+    ],
+    articles:[]
+  },
+  {
+    id:"invest-like-best", name:"Invest Like the Best", host:"Patrick O'Shaughnessy", color:"#001818", coverArt:null,
+    books:[
+      {id:"outsiders",title:"The Outsiders",author:"William Thorndike",mentions:4,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Outsiders+William+Thorndike"},
+      {id:"poor-charlies-ilb",title:"Poor Charlie's Almanack",author:"Charlie Munger",mentions:3,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Poor+Charlie%27s+Almanack"},
+      {id:"zero-to-one-ilb",title:"Zero to One",author:"Peter Thiel",mentions:3,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel"},
+      {id:"snowball-ilb",title:"The Snowball",author:"Alice Schroeder",mentions:2,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+Snowball+Warren+Buffett"},
+      {id:"more-than-you-know",title:"More Than You Know",author:"Michael Mauboussin",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=More+Than+You+Know+Mauboussin"},
+      {id:"expectations-investing",title:"Expectations Investing",author:"Michael Mauboussin",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Expectations+Investing+Mauboussin"},
+      {id:"what-i-learned-losing",title:"What I Learned Losing a Million Dollars",author:"Jim Paul & Brendan Moynihan",mentions:2,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=What+I+Learned+Losing+a+Million+Dollars"},
+      {id:"competition-demystified",title:"Competition Demystified",author:"Bruce Greenwald",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Competition+Demystified+Bruce+Greenwald"},
+      {id:"alchemy-finance",title:"The Alchemy of Finance",author:"George Soros",mentions:1,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Alchemy+of+Finance+George+Soros"},
+      {id:"big-picture",title:"Principles for Navigating Big Debt Crises",author:"Ray Dalio",mentions:1,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Principles+Navigating+Big+Debt+Crises+Dalio"},
+    ],
+    articles:[]
+  },
+  {
+    id:"masters-of-scale", name:"Masters of Scale", host:"Reid Hoffman", color:"#130025", coverArt:null,
+    books:[
+      {id:"blitzscaling-ms",title:"Blitzscaling",author:"Reid Hoffman",mentions:4,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Blitzscaling+Reid+Hoffman"},
+      {id:"zero-to-one-ms",title:"Zero to One",author:"Peter Thiel",mentions:3,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel"},
+      {id:"innovators-dilemma",title:"The Innovator's Dilemma",author:"Clayton Christensen",mentions:3,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Innovator%27s+Dilemma"},
+      {id:"no-rules-ms",title:"No Rules Rules",author:"Reed Hastings",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=No+Rules+Rules+Netflix"},
+      {id:"lean-startup",title:"The Lean Startup",author:"Eric Ries",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Lean+Startup+Eric+Ries"},
+      {id:"good-to-great",title:"Good to Great",author:"Jim Collins",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Good+to+Great+Jim+Collins"},
+      {id:"measure-what-matters",title:"Measure What Matters",author:"John Doerr",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Measure+What+Matters+John+Doerr"},
+    ],
+    articles:[]
+  },
+  {
+    id:"econtalk", name:"EconTalk", host:"Russ Roberts", color:"#0A1500", coverArt:null,
+    books:[
+      {id:"theory-moral-sentiments",title:"The Theory of Moral Sentiments",author:"Adam Smith",mentions:5,topics:["Philosophy","Business"],amazonLink:"https://www.amazon.in/s?k=The+Theory+of+Moral+Sentiments+Adam+Smith"},
+      {id:"wealth-of-nations",title:"The Wealth of Nations",author:"Adam Smith",mentions:4,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+Wealth+of+Nations"},
+      {id:"road-to-serfdom-ec",title:"The Road to Serfdom",author:"Friedrich Hayek",mentions:4,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Road+to+Serfdom+Hayek"},
+      {id:"how-adam-smith",title:"How Adam Smith Can Change Your Life",author:"Russ Roberts",mentions:3,topics:["Philosophy","Business"],amazonLink:"https://www.amazon.in/s?k=How+Adam+Smith+Can+Change+Your+Life"},
+      {id:"antifragile",title:"Antifragile",author:"Nassim Nicholas Taleb",mentions:3,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Antifragile+Nassim+Taleb"},
+      {id:"basic-econ",title:"Basic Economics",author:"Thomas Sowell",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Basic+Economics+Thomas+Sowell"},
+      {id:"capitalism-freedom",title:"Capitalism and Freedom",author:"Milton Friedman",mentions:3,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Capitalism+and+Freedom+Milton+Friedman"},
+      {id:"human-action",title:"Human Action",author:"Ludwig von Mises",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Human+Action+Mises"},
+      {id:"free-to-choose",title:"Free to Choose",author:"Milton Friedman",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Free+to+Choose+Milton+Friedman"},
+      {id:"quiet-cain",title:"Quiet",author:"Susan Cain",mentions:1,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Quiet+Susan+Cain"},
+      {id:"stillness-key",title:"Stillness Is the Key",author:"Ryan Holiday",mentions:1,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Stillness+Is+the+Key+Ryan+Holiday"},
+      {id:"wild-problems",title:"Wild Problems",author:"Russ Roberts",mentions:1,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Wild+Problems+Russ+Roberts"},
+      {id:"dreamland",title:"Dreamland",author:"Sam Quinones",mentions:1,topics:["Culture","History"],amazonLink:"https://www.amazon.in/s?k=Dreamland+Sam+Quinones"},
+    ],
+    articles:[
+      {id:"use-of-knowledge",title:"The Use of Knowledge in Society",author:"Friedrich Hayek",mentions:4,topics:["Business","Philosophy"],url:"https://www.econlib.org/library/Essays/hykKnw.html"},
+    ]
+  },
+  {
+    id:"conversations-tyler", name:"Conversations with Tyler", host:"Tyler Cowen", color:"#180E00", coverArt:null,
+    books:[
+      {id:"stubborn",title:"Stubborn Attachments",author:"Tyler Cowen",mentions:4,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Stubborn+Attachments+Tyler+Cowen"},
+      {id:"power-broker-ct",title:"The Power Broker",author:"Robert Caro",mentions:3,topics:["History"],amazonLink:"https://www.amazon.in/s?k=The+Power+Broker+Robert+Caro"},
+      {id:"great-stagnation",title:"The Great Stagnation",author:"Tyler Cowen",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=The+Great+Stagnation+Tyler+Cowen"},
+      {id:"talent-cowen",title:"Talent",author:"Tyler Cowen & Daniel Gross",mentions:2,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=Talent+Tyler+Cowen+Daniel+Gross"},
+      {id:"complacent-class",title:"The Complacent Class",author:"Tyler Cowen",mentions:2,topics:["Business","Culture"],amazonLink:"https://www.amazon.in/s?k=The+Complacent+Class+Tyler+Cowen"},
+      {id:"avg-is-over",title:"Average Is Over",author:"Tyler Cowen",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Average+Is+Over+Tyler+Cowen"},
+      {id:"working-backwards",title:"Working Backwards",author:"Colin Bryar & Bill Carr",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Working+Backwards+Colin+Bryar"},
+      {id:"here-comes-everybody",title:"Here Comes Everybody",author:"Clay Shirky",mentions:1,topics:["Tech","Culture"],amazonLink:"https://www.amazon.in/s?k=Here+Comes+Everybody+Clay+Shirky"},
+      {id:"my-brilliant-friend",title:"My Brilliant Friend",author:"Elena Ferrante",mentions:1,topics:["Culture"],amazonLink:"https://www.amazon.in/s?k=My+Brilliant+Friend+Elena+Ferrante"},
+      {id:"king-of-kings",title:"Age of Ambition",author:"Evan Osnos",mentions:1,topics:["History","Culture"],amazonLink:"https://www.amazon.in/s?k=Age+of+Ambition+Evan+Osnos"},
+    ],
+    articles:[]
+  },
+  {
+    id:"dwarkesh", name:"Dwarkesh Podcast", host:"Dwarkesh Patel", color:"#00180A", coverArt:null,
+    books:[
+      {id:"power-broker-d",title:"The Power Broker",author:"Robert Caro",mentions:3,topics:["History"],amazonLink:"https://www.amazon.in/s?k=The+Power+Broker+Robert+Caro"},
+      {id:"superintelligence-d",title:"Superintelligence",author:"Nick Bostrom",mentions:2,topics:["Tech","Science"],amazonLink:"https://www.amazon.in/s?k=Superintelligence+Nick+Bostrom"},
+      {id:"atomic-bomb-book",title:"The Making of the Atomic Bomb",author:"Richard Rhodes",mentions:2,topics:["History","Science"],amazonLink:"https://www.amazon.in/s?k=The+Making+of+the+Atomic+Bomb"},
+      {id:"destiny-disrupted",title:"Destiny Disrupted",author:"Tamim Ansary",mentions:2,topics:["History","Culture"],amazonLink:"https://www.amazon.in/s?k=Destiny+Disrupted+Tamim+Ansary"},
+      {id:"human-compatible",title:"Human Compatible",author:"Stuart Russell",mentions:2,topics:["Tech","Science"],amazonLink:"https://www.amazon.in/s?k=Human+Compatible+Stuart+Russell"},
+      {id:"alignment-problem",title:"The Alignment Problem",author:"Brian Christian",mentions:1,topics:["Tech","Science"],amazonLink:"https://www.amazon.in/s?k=The+Alignment+Problem+Brian+Christian"},
+      {id:"weird-people",title:"The WEIRDest People in the World",author:"Joseph Henrich",mentions:1,topics:["History","Culture"],amazonLink:"https://www.amazon.in/s?k=The+WEIRDest+People+in+the+World"},
+    ],
+    articles:[]
+  },
+  {
+    id:"diary-of-ceo", name:"Diary of a CEO", host:"Steven Bartlett", color:"#200C00", coverArt:null,
+    books:[
+      {id:"think-again",title:"Think Again",author:"Adam Grant",mentions:3,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=Think+Again+Adam+Grant"},
+      {id:"psych-money-doc",title:"The Psychology of Money",author:"Morgan Housel",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Psychology+of+Money+Morgan+Housel"},
+      {id:"atomic-h-doc",title:"Atomic Habits",author:"James Clear",mentions:3,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Atomic+Habits+James+Clear"},
+      {id:"outlive-doc",title:"Outlive",author:"Peter Attia",mentions:2,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Outlive+Peter+Attia"},
+      {id:"courage-doc",title:"The Courage to Be Disliked",author:"Ichiro Kishimi & Fumitake Koga",mentions:2,topics:["Psychology","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Courage+to+Be+Disliked"},
+      {id:"greenlights-doc",title:"Greenlights",author:"Matthew McConaughey",mentions:2,topics:["Culture","Psychology"],amazonLink:"https://www.amazon.in/s?k=Greenlights+Matthew+McConaughey"},
+      {id:"man-search-doc",title:"Man's Search for Meaning",author:"Viktor Frankl",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Man%27s+Search+for+Meaning+Viktor+Frankl"},
+      {id:"hard-thing-doc",title:"The Hard Thing About Hard Things",author:"Ben Horowitz",mentions:1,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=The+Hard+Thing+About+Hard+Things"},
+      {id:"4hw-doc",title:"The 4-Hour Workweek",author:"Tim Ferriss",mentions:1,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=4+Hour+Workweek+Tim+Ferriss"},
+    ],
+    articles:[]
+  },
+  {
+    id:"how-i-write", name:"How I Write", host:"David Perell", color:"#001525", coverArt:null,
+    books:[
+      {id:"bird-by-bird",title:"Bird by Bird",author:"Anne Lamott",mentions:3,topics:["Culture"],amazonLink:"https://www.amazon.in/s?k=Bird+by+Bird+Anne+Lamott"},
+      {id:"on-writing",title:"On Writing",author:"Stephen King",mentions:3,topics:["Culture"],amazonLink:"https://www.amazon.in/s?k=On+Writing+Stephen+King"},
+      {id:"show-your-work",title:"Show Your Work",author:"Austin Kleon",mentions:2,topics:["Business","Culture"],amazonLink:"https://www.amazon.in/s?k=Show+Your+Work+Austin+Kleon"},
+      {id:"elements-style",title:"The Elements of Style",author:"Strunk & White",mentions:2,topics:["Culture"],amazonLink:"https://www.amazon.in/s?k=The+Elements+of+Style"},
+    ],
+    articles:[
+      {id:"do-things-dont-scale",title:"Do Things That Don't Scale",author:"Paul Graham",mentions:4,topics:["Business","Tech"],url:"http://paulgraham.com/ds.html"},
+      {id:"pg-writing",title:"Writing, Briefly",author:"Paul Graham",mentions:3,topics:["Culture"],url:"http://paulgraham.com/writing44.html"},
+      {id:"taste-makers",title:"Taste for Makers",author:"Paul Graham",mentions:2,topics:["Business","Culture"],url:"http://paulgraham.com/taste.html"},
+      {id:"cult-of-done",title:"Cult of Done Manifesto",author:"Bre Pettis & Kio Stark",mentions:2,topics:["Business","Culture"],url:"https://medium.com/@bre/the-cult-of-done-manifesto-724ca1c2ff13"},
+    ]
+  },
+  {
+    id:"raj-shamani", name:"Raj Shamani", host:"Raj Shamani", color:"#1C0000", coverArt:null,
+    books:[
+      {id:"rich-dad",title:"Rich Dad Poor Dad",author:"Robert Kiyosaki",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Rich+Dad+Poor+Dad"},
+      {id:"psych-money-rs",title:"The Psychology of Money",author:"Morgan Housel",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Psychology+of+Money+Morgan+Housel"},
+      {id:"atomic-h-rs",title:"Atomic Habits",author:"James Clear",mentions:3,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Atomic+Habits+James+Clear"},
+      {id:"zero-to-one-rs",title:"Zero to One",author:"Peter Thiel",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel"},
+      {id:"almanack-rs",title:"The Almanack of Naval Ravikant",author:"Eric Jorgenson",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Almanack+Naval+Ravikant"},
+      {id:"ikigai-rs",title:"Ikigai",author:"Héctor García & Francesc Miralles",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Ikigai+Hector+Garcia"},
+      {id:"lets-talk-money",title:"Let's Talk Money",author:"Monika Halan",mentions:1,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Let%27s+Talk+Money+Monika+Halan"},
+    ],
+    articles:[]
+  },
+  {
+    id:"nikhil-kamath", name:"Nikhil Kamath", host:"Nikhil Kamath", color:"#001C12", coverArt:null,
+    books:[
+      {id:"psych-money-nk",title:"The Psychology of Money",author:"Morgan Housel",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Psychology+of+Money+Morgan+Housel"},
+      {id:"zero-to-one-nk",title:"Zero to One",author:"Peter Thiel",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Zero+to+One+Peter+Thiel"},
+      {id:"sapiens",title:"Sapiens",author:"Yuval Noah Harari",mentions:2,topics:["History","Culture"],amazonLink:"https://www.amazon.in/s?k=Sapiens+Yuval+Noah+Harari"},
+      {id:"principles-nk",title:"Principles",author:"Ray Dalio",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Principles+Ray+Dalio"},
+      {id:"intelligent-investor",title:"The Intelligent Investor",author:"Benjamin Graham",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Intelligent+Investor+Benjamin+Graham"},
+      {id:"flash-boys",title:"Flash Boys",author:"Michael Lewis",mentions:1,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=Flash+Boys+Michael+Lewis"},
+    ],
+    articles:[]
+  },
+  {
+    id:"beerbiceps", name:"BeerBiceps", host:"Ranveer Allahbadia", color:"#141400", coverArt:null,
+    books:[
+      {id:"power-of-now",title:"The Power of Now",author:"Eckhart Tolle",mentions:3,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=The+Power+of+Now+Eckhart+Tolle"},
+      {id:"bhagavad-gita",title:"Bhagavad Gita",author:"Various",mentions:3,topics:["Philosophy"],amazonLink:"https://www.amazon.in/s?k=Bhagavad+Gita"},
+      {id:"think-grow-rich",title:"Think and Grow Rich",author:"Napoleon Hill",mentions:2,topics:["Business","Psychology"],amazonLink:"https://www.amazon.in/s?k=Think+and+Grow+Rich"},
+      {id:"autobiography-yogi",title:"Autobiography of a Yogi",author:"Paramahansa Yogananda",mentions:2,topics:["Philosophy","Culture"],amazonLink:"https://www.amazon.in/s?k=Autobiography+of+a+Yogi"},
+      {id:"cant-hurt-me",title:"Can't Hurt Me",author:"David Goggins",mentions:2,topics:["Psychology","Health"],amazonLink:"https://www.amazon.in/s?k=Can%27t+Hurt+Me+David+Goggins"},
+      {id:"ikigai-bb",title:"Ikigai",author:"Héctor García & Francesc Miralles",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Ikigai+Hector+Garcia"},
+    ],
+    articles:[]
+  },
+  {
+    id:"seen-unseen", name:"Seen and Unseen", host:"Amit Varma", color:"#001818", coverArt:null,
+    books:[
+      {id:"india-after-gandhi",title:"India after Gandhi",author:"Ramachandra Guha",mentions:4,topics:["History","Culture"],amazonLink:"https://www.amazon.in/s?k=India+after+Gandhi+Ramachandra+Guha"},
+      {id:"argumentative-indian",title:"The Argumentative Indian",author:"Amartya Sen",mentions:4,topics:["History","Culture"],amazonLink:"https://www.amazon.in/s?k=The+Argumentative+Indian+Amartya+Sen"},
+      {id:"in-service-republic",title:"In Service of the Republic",author:"Vijay Kelkar & Ajay Shah",mentions:3,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=In+Service+of+the+Republic+Kelkar+Shah"},
+      {id:"elephant-brain",title:"The Elephant in the Brain",author:"Kevin Simler & Robin Hanson",mentions:3,topics:["Psychology","Culture"],amazonLink:"https://www.amazon.in/s?k=Elephant+in+the+Brain"},
+      {id:"open-society",title:"The Open Society and Its Enemies",author:"Karl Popper",mentions:3,topics:["Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Open+Society+and+Its+Enemies+Popper"},
+      {id:"road-to-serfdom",title:"The Road to Serfdom",author:"Friedrich Hayek",mentions:3,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Road+to+Serfdom+Hayek"},
+      {id:"wanting",title:"Wanting",author:"Luke Burgis",mentions:3,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Wanting+Luke+Burgis"},
+      {id:"early-indians",title:"Early Indians",author:"Tony Joseph",mentions:3,topics:["History","Science"],amazonLink:"https://www.amazon.in/s?k=Early+Indians+Tony+Joseph"},
+      {id:"difficulty-being-good",title:"The Difficulty of Being Good",author:"Gurcharan Das",mentions:2,topics:["Philosophy","Culture"],amazonLink:"https://www.amazon.in/s?k=The+Difficulty+of+Being+Good+Gurcharan+Das"},
+      {id:"vp-menon",title:"VP Menon: The Unsung Architect of Modern India",author:"Narayani Basu",mentions:2,topics:["History"],amazonLink:"https://www.amazon.in/s?k=VP+Menon+Narayani+Basu"},
+      {id:"private-truths",title:"Private Truths, Public Lies",author:"Timur Kuran",mentions:2,topics:["Psychology","Culture"],amazonLink:"https://www.amazon.in/s?k=Private+Truths+Public+Lies+Timur+Kuran"},
+      {id:"beginning-infinity",title:"The Beginning of Infinity",author:"David Deutsch",mentions:2,topics:["Science","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Beginning+of+Infinity+David+Deutsch"},
+      {id:"thinking-fast-slow-su",title:"Thinking, Fast and Slow",author:"Daniel Kahneman",mentions:2,topics:["Psychology"],amazonLink:"https://www.amazon.in/s?k=Thinking+Fast+and+Slow+Kahneman"},
+      {id:"stubborn-su",title:"Stubborn Attachments",author:"Tyler Cowen",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Stubborn+Attachments+Tyler+Cowen"},
+      {id:"behave",title:"Behave",author:"Robert Sapolsky",mentions:2,topics:["Science","Psychology"],amazonLink:"https://www.amazon.in/s?k=Behave+Robert+Sapolsky"},
+      {id:"third-pillar",title:"The Third Pillar",author:"Raghuram Rajan",mentions:2,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Third+Pillar+Raghuram+Rajan"},
+      {id:"samaaj-sarkaar",title:"Samaaj, Sarkaar, Bazaar",author:"Rohini Nilekani",mentions:2,topics:["Business","Culture"],amazonLink:"https://www.amazon.in/s?k=Samaaj+Sarkaar+Bazaar+Rohini+Nilekani"},
+      {id:"four-thousand-weeks",title:"Four Thousand Weeks",author:"Oliver Burkeman",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Four+Thousand+Weeks+Oliver+Burkeman"},
+      {id:"atomic-h-su",title:"Atomic Habits",author:"James Clear",mentions:1,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Atomic+Habits+James+Clear"},
+      {id:"gita-press",title:"Gita Press and the Making of Hindu India",author:"Akshaya Mukul",mentions:1,topics:["History","Culture"],amazonLink:"https://www.amazon.in/s?k=Gita+Press+Making+Hindu+India+Akshaya+Mukul"},
+    ],
+    articles:[
+      {id:"transitional-gains-trap",title:"The Transitional Gains Trap",author:"Gordon Tullock",mentions:2,topics:["Business","Philosophy"],url:"https://www.jstor.org/stable/3480266"},
+      {id:"death-of-author",title:"Death of the Author",author:"Roland Barthes",mentions:1,topics:["Culture"],url:"https://writing.upenn.edu/~taransky/Barthes.pdf"},
+    ]
+  },
+  {
+    id:"lennys-podcast", name:"Lenny's Podcast", host:"Lenny Rachitsky", color:"#0A0020", coverArt:null,
+    books:[
+      {id:"inspired",title:"Inspired",author:"Marty Cagan",mentions:5,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Inspired+Marty+Cagan"},
+      {id:"continuous-discovery",title:"Continuous Discovery Habits",author:"Teresa Torres",mentions:4,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Continuous+Discovery+Habits+Teresa+Torres"},
+      {id:"mom-test",title:"The Mom Test",author:"Rob Fitzpatrick",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=The+Mom+Test+Rob+Fitzpatrick"},
+      {id:"obviously-awesome",title:"Obviously Awesome",author:"April Dunford",mentions:3,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Obviously+Awesome+April+Dunford"},
+      {id:"competing-luck",title:"Competing Against Luck",author:"Clayton Christensen",mentions:2,topics:["Business","Tech"],amazonLink:"https://www.amazon.in/s?k=Competing+Against+Luck+Clayton+Christensen"},
+    ],
+    articles:[
+      {id:"good-pm-bad-pm",title:"Good Product Manager / Bad Product Manager",author:"Ben Horowitz",mentions:4,topics:["Business","Tech"],url:"https://a16z.com/good-product-manager-bad-product-manager/"},
+      {id:"do-things-lenny",title:"Do Things That Don't Scale",author:"Paul Graham",mentions:3,topics:["Business","Tech"],url:"http://paulgraham.com/ds.html"},
+      {id:"pmf-lenny",title:"How to Know If You've Got Product-Market Fit",author:"Lenny Rachitsky",mentions:3,topics:["Business","Tech"],url:"https://www.lennysnewsletter.com/p/how-to-know-if-youve-got-productmarket"},
+      {id:"impostor-adv",title:"The Impostor's Advantage",author:"Shaan Puri",mentions:2,topics:["Business","Psychology"],url:"https://www.shaanpuri.com/posts/the-impostors-advantage"},
+    ]
+  },
+
+  {
+    id:"everything-is-everything", name:"Everything is Everything", host:"Amit Varma & Ajay Shah", color:"#001C00", coverArt:null,
+    books:[
+      {id:"in-service-eie",title:"In Service of the Republic",author:"Vijay Kelkar & Ajay Shah",mentions:5,topics:["Business","History"],amazonLink:"https://www.amazon.in/s?k=In+Service+of+the+Republic+Kelkar+Shah"},
+      {id:"seeing-like-state",title:"Seeing Like a State",author:"James C. Scott",mentions:4,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Seeing+Like+a+State+James+Scott"},
+      {id:"economics-one-lesson",title:"Economics in One Lesson",author:"Henry Hazlitt",mentions:4,topics:["Business"],amazonLink:"https://www.amazon.in/s?k=Economics+in+One+Lesson+Henry+Hazlitt"},
+      {id:"road-serfdom-eie",title:"The Road to Serfdom",author:"Friedrich Hayek",mentions:3,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Road+to+Serfdom+Hayek"},
+      {id:"open-society-eie",title:"The Open Society and Its Enemies",author:"Karl Popper",mentions:3,topics:["Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Open+Society+and+Its+Enemies+Popper"},
+      {id:"wanting-eie",title:"Wanting",author:"Luke Burgis",mentions:3,topics:["Psychology","Business"],amazonLink:"https://www.amazon.in/s?k=Wanting+Luke+Burgis"},
+      {id:"elephant-brain-eie",title:"The Elephant in the Brain",author:"Kevin Simler & Robin Hanson",mentions:3,topics:["Psychology","Culture"],amazonLink:"https://www.amazon.in/s?k=Elephant+in+the+Brain"},
+      {id:"thinking-fast-slow-eie",title:"Thinking, Fast and Slow",author:"Daniel Kahneman",mentions:2,topics:["Psychology"],amazonLink:"https://www.amazon.in/s?k=Thinking+Fast+and+Slow+Kahneman"},
+      {id:"beginning-infinity-eie",title:"The Beginning of Infinity",author:"David Deutsch",mentions:2,topics:["Science","Philosophy"],amazonLink:"https://www.amazon.in/s?k=The+Beginning+of+Infinity+David+Deutsch"},
+      {id:"behave-eie",title:"Behave",author:"Robert Sapolsky",mentions:2,topics:["Science","Psychology"],amazonLink:"https://www.amazon.in/s?k=Behave+Robert+Sapolsky"},
+      {id:"four-thousand-weeks-eie",title:"Four Thousand Weeks",author:"Oliver Burkeman",mentions:2,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Four+Thousand+Weeks+Oliver+Burkeman"},
+      {id:"stubborn-eie",title:"Stubborn Attachments",author:"Tyler Cowen",mentions:2,topics:["Business","Philosophy"],amazonLink:"https://www.amazon.in/s?k=Stubborn+Attachments+Tyler+Cowen"},
+      {id:"private-truths-eie",title:"Private Truths, Public Lies",author:"Timur Kuran",mentions:2,topics:["Psychology","Culture"],amazonLink:"https://www.amazon.in/s?k=Private+Truths+Public+Lies+Timur+Kuran"},
+      {id:"lifespan-eie",title:"Lifespan",author:"David Sinclair",mentions:1,topics:["Health","Science"],amazonLink:"https://www.amazon.in/s?k=Lifespan+David+Sinclair"},
+      {id:"waking-up-eie",title:"Waking Up",author:"Sam Harris",mentions:1,topics:["Philosophy","Psychology"],amazonLink:"https://www.amazon.in/s?k=Waking+Up+Sam+Harris"},
+      {id:"brave-new-world-eie",title:"Brave New World",author:"Aldous Huxley",mentions:1,topics:["Culture","Science"],amazonLink:"https://www.amazon.in/s?k=Brave+New+World+Aldous+Huxley"},
+    ],
+    articles:[
+      {id:"double-thankyou",title:"The Double Thank-You Moment",author:"John Stossel",mentions:3,topics:["Business","Philosophy"],url:"https://reason.com/2009/09/29/the-double-thank-you-moment/"},
+    ]
+  },
+
+];
+
+/* ══════════════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════════════ */
+const S = { view:'home', podId:null, gTab:'books', pTab:'books', gFilter:null, pFilter:null };
+
+/* ══════════════════════════════════════════════════════
+   UTILS
+   ══════════════════════════════════════════════════════ */
+const initials = n => n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+
+function topics(type) {
+  const s = new Set();
+  DATA.forEach(p => items(p,type).forEach(i => i.topics.forEach(t => s.add(t))));
+  return [...s].sort();
+}
+function podTopics(pod, type) {
+  const s = new Set();
+  items(pod,type).forEach(i => i.topics.forEach(t => s.add(t)));
+  return [...s].sort();
+}
+function items(pod, type) { return type==='books' ? pod.books : pod.articles; }
+
+function globalRecs(type, filter) {
+  const map = {};
+  DATA.forEach(p => {
+    items(p,type).forEach(item => {
+      const k = item.title.toLowerCase().trim();
+      if (map[k]) { map[k].mentions += item.mentions; if (!map[k].pods.includes(p.name)) map[k].pods.push(p.name); }
+      else map[k] = {...item, pods:[p.name]};
+    });
+  });
+  let r = Object.values(map);
+  if (filter) r = r.filter(i => i.topics.includes(filter));
+  return r.sort((a,b) => b.mentions - a.mentions);
+}
+
+function podItems(pod, type, filter) {
+  /* Show ALL items — no minimum mention filter */
+  let r = [...items(pod, type)];
+  if (filter) r = r.filter(i => i.topics.includes(filter));
+  return r.sort((a,b) => b.mentions - a.mentions);
+}
+
+function countStats() {
+  const b=new Set(), a=new Set();
+  DATA.forEach(p => { p.books.forEach(x=>b.add(x.title.toLowerCase())); p.articles.forEach(x=>a.add(x.title.toLowerCase())); });
+  return { books:b.size, articles:a.size, pods:DATA.length };
+}
+
+/* ══════════════════════════════════════════════════════
+   HTML BUILDERS
+   ══════════════════════════════════════════════════════ */
+function rowHTML(item, type, showPods) {
+  const link = type==='books' ? item.amazonLink : item.url;
+  const lbl  = type==='books' ? 'Amazon ↗' : 'Read ↗';
+  const pods = showPods && item.pods && item.pods.length > 1
+    ? `<span class="rec-pods">across ${item.pods.length} podcasts</span>` : '';
+  const safeTitle = (item.title||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  const safeAuthor = (item.author||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  const coverCell = type==='books'
+    ? `<div class="rec-cover" data-book-id="${item.id}" data-title="${safeTitle}" data-author="${safeAuthor}"><div class="rec-cover-skeleton"></div></div>`
+    : `<div class="rec-cover"><div class="rec-cover-none">Article</div></div>`;
+  return `
+  <div class="rec-row">
+    <span class="rec-count-ghost">${item.mentions}</span>
+    ${coverCell}
+    <div class="rec-count"><span class="n">${item.mentions}</span><span class="l">${item.mentions===1?'mention':'mentions'}</span></div>
+    <div class="rec-body">
+      <div class="rec-title">${item.title}</div>
+      <div class="rec-author">${item.author||''}${pods}</div>
+      <div class="rec-tags">${item.topics.map(t=>`<span class="rec-tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="rec-action">${link ? `<a href="${link}" target="_blank" rel="noopener">${lbl}</a>` : ''}</div>
+  </div>`;
+}
+
+function chipsHTML(ts, active, fn) {
+  return [`<button class="chip${!active?' on':''}" onclick="${fn}(null,this)">All</button>`,
+    ...ts.map(t=>`<button class="chip${active===t?' on':''}" onclick="${fn}('${t}',this)">${t}</button>`)
+  ].join('');
+}
+
+function podArt(pod, size) {
+  const sty = `background:${pod.color};width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;`;
+  if (pod.coverArt) return `<img src="${pod.coverArt}" alt="${pod.name}" style="width:${size}px;height:${size}px;object-fit:cover;">`;
+  return `<div style="${sty}"><span style="font-family:'Fraunces',serif;font-size:${size*.35}px;font-weight:700;font-style:italic;color:rgba(255,255,255,.55)">${initials(pod.name)}</span></div>`;
+}
+
+/* ══════════════════════════════════════════════════════
+   RENDER
+   ══════════════════════════════════════════════════════ */
+function renderRankCards(type) {
+  const recs = globalRecs(type, null);
+  const top = recs.slice(0, 8);
+  document.getElementById('rank-scroll').innerHTML = top.map((item, idx) => {
+    const link = type==='books' ? item.amazonLink : item.url;
+    const safeTitle = (item.title||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    const safeAuthor = (item.author||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    const coverCell = type==='books'
+      ? `<div class="rank-cover-skel"></div>`
+      : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);writing-mode:vertical-rl">Article</div>`;
+    return `<div class="rank-card" data-rank-id="${item.id}" data-title="${safeTitle}" data-author="${safeAuthor}" onclick="${link?`window.open('${link}','_blank')`:''}" style="${link?'':'cursor:default'}">
+      <div class="rank-cover">
+        <span class="rank-num">${idx+1}</span>
+        ${coverCell}
+      </div>
+      <div class="rank-title">${item.title}</div>
+      <div class="rank-author">${item.author||''}</div>
+      <div class="rank-count">${item.mentions} mention${item.mentions!==1?'s':''}</div>
+    </div>`;
+  }).join('');
+  if (type==='books') loadRankCovers();
+}
+
+function renderGlobal() {
+  document.getElementById('g-chips').innerHTML = chipsHTML(topics(S.gTab), S.gFilter, 'setGFilter');
+  const recs = globalRecs(S.gTab, S.gFilter);
+  document.getElementById('g-list').innerHTML = recs.length
+    ? recs.slice(0,30).map((i,idx) => { const el=rowHTML(i,S.gTab,true); return el.replace('class="rec-row"',`class="rec-row" style="animation-delay:${idx*0.03}s"`); }).join('')
+    : '<div class="empty">Nothing here yet.</div>';
+  if (S.gTab==='books') loadBookCovers('g-list');
+}
+
+function setHeroTab(type, btn) {
+  document.querySelectorAll('.hero-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderRankCards(type);
+}
+
+function toggleAllRecs(btn) {
+  const sect = document.getElementById('all-recs-sect');
+  const isOpen = sect.style.display !== 'none';
+  sect.style.display = isOpen ? 'none' : 'block';
+  btn.textContent = isOpen ? 'View all recommendations  →' : 'Hide recommendations  ↑';
+  if (!isOpen) {
+    renderGlobal();
+    sect.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+
+function renderGrid() {
+  const sorted = [...DATA].sort((a,b) => (b.books.length+b.articles.length) - (a.books.length+a.articles.length));
+  document.getElementById('pod-grid').innerHTML = sorted.map((p,idx) => {
+    const n = p.books.length + p.articles.length;
+    return `<div class="pod-card" data-pod-id="${p.id}" onclick="showPod('${p.id}')" style="animation-delay:${idx*0.03}s">
+      <div class="pod-bg" style="background:${p.color};position:absolute;inset:0"><span class="pod-initials">${initials(p.name)}</span></div>
+      <div class="pod-overlay"></div>
+      <div class="pod-info">
+        <div class="pod-name">${p.name}</div>
+        <div class="pod-host">${p.host}</div>
+        <div class="pod-count">${n} rec${n!==1?'s':''}</div>
+      </div>
+    </div>`;
+  }).join('');
+  loadPodcastArtwork();
+}
+
+function renderPodHdr(pod) {
+  document.getElementById('pod-hdr').innerHTML = `
+    <div class="pod-hdr-art" id="pod-hdr-art-${pod.id}" style="background:${pod.color}">
+      <span class="pod-hdr-initials">${initials(pod.name)}</span>
+    </div>
+    <div class="pod-hdr-info">
+      <h2>${pod.name}</h2>
+      <div class="pod-hdr-host">${pod.host}</div>
+      <div class="pod-hdr-stats">
+        <div class="pod-stat"><div class="n">${pod.books.length}</div><div class="l">Books</div></div>
+        <div class="pod-stat"><div class="n">${pod.articles.length}</div><div class="l">Articles</div></div>
+      </div>
+    </div>`;
+  loadSinglePodArt(pod);
+}
+
+function renderPodList() {
+  const pod = DATA.find(p => p.id===S.podId);
+  if (!pod) return;
+  document.getElementById('p-chips').innerHTML = chipsHTML(podTopics(pod,S.pTab), S.pFilter, 'setPFilter');
+  const its = podItems(pod, S.pTab, S.pFilter);
+  document.getElementById('p-list').innerHTML = its.length
+    ? its.map((i,idx) => { const el=rowHTML(i,S.pTab,false); return el.replace('class="rec-row"',`class="rec-row" style="animation-delay:${idx*0.04}s"`); }).join('')
+    : '<div class="empty">Nothing here yet — check back soon.</div>';
+  if (S.pTab==='books') loadBookCovers('p-list');
+}
+
+/* ══════════════════════════════════════════════════════
+   ARTWORK FETCHING
+   ══════════════════════════════════════════════════════ */
+const artCache = {};
+
+async function fetchPodcastArt(podId, podName) {
+  if (artCache[podId] !== undefined) return artCache[podId];
+  artCache[podId] = null; // prevent duplicate fetches
+  try {
+    const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(podName)}&media=podcast&entity=podcast&limit=1&country=us`);
+    const d = await r.json();
+    const art = d.results?.[0]?.artworkUrl600 || null;
+    artCache[podId] = art;
+    return art;
+  } catch(e) { return null; }
+}
+
+async function fetchBookCover(bookId, title, author) {
+  const key = `book_${bookId}`;
+  if (artCache[key] !== undefined) return artCache[key];
+  artCache[key] = null;
+  try {
+    const q = encodeURIComponent(`intitle:${title}${author ? ' inauthor:'+author : ''}`);
+    const r = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=1&fields=items/volumeInfo/imageLinks`);
+    const d = await r.json();
+    let thumb = d.items?.[0]?.volumeInfo?.imageLinks?.thumbnail || null;
+    if (thumb) thumb = thumb.replace('http://', 'https://').replace('zoom=1','zoom=2');
+    artCache[key] = thumb;
+    return thumb;
+  } catch(e) { return null; }
+}
+
+async function loadPodcastArtwork() {
+  for (const p of DATA) {
+    const bgEl = document.querySelector(`.pod-card[data-pod-id="${p.id}"] .pod-bg`);
+    if (!bgEl) continue;
+    const art = p.coverArt || await fetchPodcastArt(p.id, p.name);
+    if (art && bgEl.querySelector('.pod-initials')) {
+      bgEl.style.background = 'none';
+      bgEl.innerHTML = `<img src="${art}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block">`;
+    }
+  }
+}
+
+async function loadSinglePodArt(pod) {
+  const art = pod.coverArt || await fetchPodcastArt(pod.id, pod.name);
+  const el = document.getElementById(`pod-hdr-art-${pod.id}`);
+  if (art && el) {
+    el.style.background = 'none';
+    el.innerHTML = `<img src="${art}" alt="${pod.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px">`;
+  }
+}
+
+async function loadRankCovers() {
+  const cards = document.querySelectorAll('#rank-scroll .rank-card[data-rank-id]');
+  for (const el of cards) {
+    const id = el.dataset.rankId;
+    const title = el.dataset.title;
+    const author = el.dataset.author;
+    const coverWrap = el.querySelector('.rank-cover');
+    if (!coverWrap) continue;
+    const url = await fetchBookCover(id, title, author);
+    const skel = coverWrap.querySelector('.rank-cover-skel');
+    if (url && skel) {
+      skel.outerHTML = `<img src="${url}" alt="${title}" style="width:100%;height:100%;object-fit:cover;display:block">`;
+    }
+  }
+}
+
+async function loadBookCovers(containerId) {
+  const covers = document.querySelectorAll(`#${containerId} .rec-cover[data-book-id]`);
+  for (const el of covers) {
+    const id = el.dataset.bookId;
+    const title = el.dataset.title;
+    const author = el.dataset.author;
+    const url = await fetchBookCover(id, title, author);
+    if (url) {
+      el.innerHTML = `<img src="${url}" alt="${title}" loading="lazy">`;
+    } else {
+      el.innerHTML = `<div class="rec-cover-none">${title.slice(0,8)}</div>`;
+    }
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   ACTIONS
+   ══════════════════════════════════════════════════════ */
+function showHome() {
+  S.view='home'; S.podId=null;
+  document.getElementById('home-view').classList.add('on');
+  document.getElementById('pod-view').classList.remove('on');
+  document.getElementById('back').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState({},'','#');
+}
+
+function showPod(id) {
+  const pod = DATA.find(p=>p.id===id); if(!pod) return;
+  S.view='pod'; S.podId=id; S.pTab='books'; S.pFilter=null;
+  document.getElementById('home-view').classList.remove('on');
+  document.getElementById('pod-view').classList.add('on');
+  document.getElementById('back').style.display='flex';
+  document.querySelectorAll('#p-tabs .tab').forEach((b,i)=>b.classList.toggle('on',i===0));
+  renderPodHdr(pod);
+  renderPodList();
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState({},'',`#${id}`);
+}
+
+function setGTab(t, btn) {
+  S.gTab=t; S.gFilter=null;
+  document.querySelectorAll('#g-tabs .tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); renderGlobal();
+}
+function setPTab(t, btn) {
+  S.pTab=t; S.pFilter=null;
+  document.querySelectorAll('#p-tabs .tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); renderPodList();
+}
+function setGFilter(t, btn) {
+  S.gFilter=t;
+  document.querySelectorAll('#g-chips .chip').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); renderGlobal();
+}
+function setPFilter(t, btn) {
+  S.pFilter=t;
+  document.querySelectorAll('#p-chips .chip').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); renderPodList();
+}
+
+/* ══════════════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const st = countStats();
+  document.getElementById('s-books').textContent   = st.books;
+  document.getElementById('s-articles').textContent = st.articles;
+  document.getElementById('s-pods').textContent     = st.pods;
+  renderRankCards('books');
+  renderGrid();
+  const h = window.location.hash.slice(1);
+  if (h && DATA.find(p=>p.id===h)) showPod(h);
+});
+
+window.addEventListener('popstate', () => {
+  const h = window.location.hash.slice(1);
+  if (h && DATA.find(p=>p.id===h)) showPod(h);
+  else showHome();
+});
+</script>
+
+
+</body></html>
